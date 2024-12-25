@@ -10,6 +10,21 @@
 		 	}
 		 },
 		 {
+			"path": "pages/home/index",
+			"style": {
+				// "navigationStyle": "custom"
+			   "navigationBarBackgroundColor": "#2F2F38",
+			   "navigationBarTitleText": "%components.Nav.home%"
+			}
+		},
+		{
+			"path": "pages/home/shurafield",
+			"style": {
+			   "navigationBarBackgroundColor": "#2F2F38",
+			   "navigationBarTitleText": "%components.Nav.home%"
+			}
+		},
+		 {
 		 	"path": "pages/dashboard/dashboard_zh",
 		 	"style": {
 		 		// "navigationStyle": "custom"

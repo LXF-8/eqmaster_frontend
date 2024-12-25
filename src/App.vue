@@ -26,7 +26,7 @@
 							// 	url: `/pages/dashboard/dashboard_en?currentView=dashboard`
 							// });
 							uni.navigateTo({
-								url: `/pages/dashboard/dashboard_zh?currentView=dashboard`
+								url: `/pages/home/index?currentView=dashboard`
 							});
 						}
 					} else {

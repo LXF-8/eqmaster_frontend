@@ -48,9 +48,9 @@
 				const currentPages = getCurrentPages();
 				const currentRoute = currentPages[currentPages.length - 1].route;
 				if (val === 'Home') {
-					if (currentRoute !== 'pages/dashboard/dashboard_zh') {
+					if (currentRoute !== 'pages/home/index') {
 						uni.reLaunch({
-							url: `/pages/dashboard/dashboard_zh` // 添加查询参数
+							url: `/pages/home/index` // 添加查询参数
 						});
 					}
 					this.$store.commit('setHomeNavName', 'dashboard');
@@ -60,9 +60,9 @@
 					// this.$emit('switchHomeView', "dashboard");
 				}
 				if (val === 'Battlefield') {
-					if (currentRoute !== 'pages/dashboard/dashboard_zh') {
+					if (currentRoute !== 'pages/home/index') {
 						uni.reLaunch({
-							url: `/pages/dashboard/dashboard_zh` // 添加查询参数
+							url: `/pages/home/index` // 添加查询参数
 						});
 					}
 					this.$store.commit('setHomeNavName', 'dashboard2');
