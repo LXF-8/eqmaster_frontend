@@ -50,11 +50,18 @@
 			return {
 				htmlContent: `<view class="description content-item" id="desc">111</view>`,
 				nodes: [],
-				previousCourseData: null // 初始化之前的课程数据
+				previousCourseData: null, // 初始化之前的课程数据
+				courseId: 0,
 			};
 		},
 		created() {
-			this.loadCourse();
+			
+		},
+		onLoad(options) {
+			if(!options.courseId || options.courseId <= 0) {
+				uni.navigateBack();
+			}
+			this.courseId = options.courseId;
 		},
 		computed: {
 			npcs() {
@@ -170,9 +177,6 @@
 				return getImg(this.themeColors.background);
 			},
 		},
-		onLoad() {
-			// this.generateNpcHtml();
-		},
 		watch: {
 			courseInfo(newValue) {
 				// console.log("courseInfo : ", newValue);
@@ -181,11 +185,20 @@
 					// this.generateNpcHtml(newValue.course_data);
 				}
 			},
+			courseId: {
+				handler(newValue) {
+					console.log(newValue);
+					if(newValue > 0) {
+						this.loadCourse();
+					}
+				},
+				deep: true,
+			},
 		},
 		methods: {
 			navigateToNextPage() {
-				uni.reLaunch({
-					url: '/pages/battlefield/battlefield-task' // Replace this with the actual path to your next page
+				uni.redirectTo({
+					url: `/pages/battlefield/battlefield-task?courseId=${this.courseId}` // Replace this with the actual path to your next page
 				});
 			},
 			goToDashboard() {
@@ -193,14 +206,14 @@
 					uni.navigateBack(); // 返回上一个页面
 				} else {
 					uni.redirectTo({
-						url: '/pages/dashboard/dashboard_zh' // 如果没有历史记录，导航到指定页面
+						url: '/pages/home/index' // 如果没有历史记录，导航到指定页面
 					});
 				}
 			},
 			async loadCourse() {
 				try {
-					await this.$store.dispatch('fetchCourseInfo', this.courseData.next_course_id)
-					console.log('courseInfo:', this.courseInfo)
+					await this.$store.dispatch('fetchCourseInfo', this.courseId)
+					// console.log('courseInfo:', this.courseInfo)
 					// 成功获取课程信息后的操作
 				} catch (error) {
 					// 处理错误

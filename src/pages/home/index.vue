@@ -3,29 +3,19 @@
 		<scroll-view scroll-y>
 			<view class="content">
 				<!-- 添加错误处理和加载状态 -->
-				<view v-if="isLoading">加载中...</view>
+				<view v-if="isLoading">{{ $t('pages.home.loading') }}</view>
 				<view v-else-if="error">{{ error }}</view>
 				<view v-else>
 					<view class="today-recommend">
-						<view class="today-recommend-title">今日推荐</view>
-						<view class="today-recommend-desc">提升情商，从此“课”开始！</view>
+						<view class="today-recommend-title">{{ $t('pages.home.index.today-recommend') }}</view>
+						<view class="today-recommend-desc">{{ $t('pages.home.index.today-recommend-desc') }}</view>
 						<view class="class-item-container">
-							<view class="class-item-left">
-								<image class="class-item-image" src="/static/rectangle-left.png" mode="widthFix"></image>
-								<view class="class-item-text">
-									<view class="class-item-text-title">
-										老板肚子的蛔虫
-									</view>
-									<view class="class-item-text-desc">
-										100人在玩
-									</view>
-								</view>
-							</view>
-							<view class="class-item-right">
+							<view class="class-item-left" v-for="(item, index) in courseDataList" :key="index" @click="jumpBattlefield(item)">
+								<!-- <image class="class-item-image" :src="getImg(item.image)" mode="widthFix"></image> -->
 								<image class="class-item-image" src="/static/rectangle-right.png" mode="widthFix"></image>
 								<view class="class-item-text">
 									<view class="class-item-text-title">
-										事业爱情两难全
+										{{ item.title }}
 									</view>
 									<view class="class-item-text-desc">
 										100人在玩
@@ -36,37 +26,25 @@
 					</view>
 
 					<view class="chat-interpretation">
-						<view class="chat-interpretation-title">聊天解读</view>
-						<view class="chat-interpretation-desc">分析聊天对话，获得独到见解的聊天建议</view>
+						<view class="chat-interpretation-title">{{ $t('pages.home.index.chat-interpretation') }}</view>
+						<view class="chat-interpretation-desc">{{ $t('pages.home.index.chat-interpretation-desc') }}</view>
 						<view class="upload-card" @click="chooseImage">
 							<view class="upload-card-container">
 								<view class="upload-card-title">
 									<image class="upload-card-image" src="/static/chat-upload.png" mode="widthFix"></image>
-									上传聊天记录
+									{{ $t('pages.home.index.upload-chat-history') }}
 								</view>
-								<view class="upload-card-desc">遇到难以回复的消息？立刻上传吧！</view>
+								<view class="upload-card-desc">{{ $t('pages.home.index.upload-chat-history-desc') }}</view>
 							</view>
 						</view>
 					</view>
 
-					<view class="history-solid"><span class="line"></span>历史记录<span class="line"></span></view> 
+					<view class="history-solid"><span class="line"></span>{{ $t('pages.home.index.history') }}<span class="line"></span></view> 
 
 					<view class="history-list">
-						<view class="history-item">
-							<view class="history-list-title">清晰且及时的沟通是钥匙</view>
-							<view class="history-list-content">当前问题在于，虽然任务已达成一致，但缺乏关于进展或延误的主动沟通，导致未接来电...</view>
-							<view class="history-list-footer">
-								<view class="history-list-tab">
-									<view class="tab-item">职场</view>
-									<view class="tab-item">沟通技巧</view>
-								</view>
-								<view class="history-list-time">11:31</view>
-							</view>
-						</view>
-
-						<view class="history-item">
-							<view class="history-list-title">清晰且及时的沟通是钥匙</view>
-							<view class="history-list-content">当前问题在于，虽然任务已达成一致，但缺乏关于进展或延误的主动沟通，导致未接来电...</view>
+						<view class="history-item" v-for="(item, index) in analysisList" :key="index" @tap="navigateToAnalysis(item)">
+							<view class="history-list-title">{{ item.analysis.title.title }}</view>
+							<view class="history-list-content">{{ item.analysis.summary.summary }}</view>
 							<view class="history-list-footer">
 								<view class="history-list-tab">
 									<view class="tab-item">职场</view>
@@ -80,8 +58,7 @@
 				</view>
 			</view>
 		</scroll-view>
-		<Nav :selectedView="currentView === 'dashboard' ? 'Home' : 'Battlefield'" @switchHomeView="switchView"
-			:userId="userId" :username="username" :jobId="jobId" />
+		<Nav selectedView="Home" />
 	</view>
 </template>
 
@@ -96,59 +73,15 @@
 		illustrationSrc
 	} from '../../scripts/illustrationHelper_zh';
 	import locale from '@/locale';
+	import { getImg } from '../../scripts/constants';
 
 	export default {
 
 		data() {
 			return {
-				score: 28, // 示例分数，可根据需要动态改
-				maxScore: 100, // 假设最大分数为100
-				gender: '',
-				birthday: null,
-				selectedOptions: [],
-				jobId: null,
-				num: null,
-				finishComponents: 1,
-				totalComponents: 3,
+				getImg,
 				isLoading: true,
 				error: null,
-				analysisList: [],
-				animal: '',
-				animal_zh: '',
-				minanimal: '',
-				maxanimal: '',
-				// courseData: {},
-				showSplash: false, // 默认不显示闪屏
-				progress: 0,
-				progressInterval: null,
-				isExpanded: false, // 默认收起状态
-				showPopup: false, // 将初始值设为 false，使弹窗在页面加载时不显示
-				selectedOption: 'subordinate', // 默认选择"同事"
-				// 添加同类型的标签表
-				colleagueTags: ['摸鱼高手', '时间管理大师', '潜力股', '马屁精', '靠谱伙伴'],
-				bossSubordinateTags: ['完美主义者', 'PUA大', '加班狂魔', '甩锅侠', '独裁者'],
-				selectedTags: [],
-				isProfileComplete: false, // New data property to track profile completion
-				profileName: '', // New data property for profile name
-				roleCards: [{
-						title: '角色卡1'
-					},
-					{
-						title: '角色卡2'
-					},
-					{
-						title: '角色卡3'
-					},
-					{
-						title: '角色卡4'
-					},
-					{
-						title: '角色卡5'
-					},
-					// 可以根需要添加更多卡片
-				],
-				showNewPopup: false,
-				currentDate: new Date(),
 			};
 		},
 		computed: {
@@ -170,9 +103,12 @@
 			weakness() {
 				return this.$store.getters.getWeakness;
 			},
-			courseData() {
-				return this.$store.getters.getcourseData;
+			courseDataList() {
+				return this.$store.getters.getCourseDataList;
 			},
+			analysisList() {
+				return this.$store.getters.getAnalysisList;
+			}
 		},
 		watch: {
 			homepageData: {
@@ -188,6 +124,7 @@
 				immediate: true,
 				async handler(val) {
 					if (val && val > 0) {
+						this.getAnalysisList(val);
 						this.$store.dispatch('fetchcourseData');
 					}
 				},
@@ -201,19 +138,16 @@
 			AbilityProgressBar
 		},
 		async created() {
-			await this.getAnalysisList();
-
 			illustrationSrc(this.homepageData, this.$store, this.$t);
 		},
 		onLoad(option) {
-			this.$store.dispatch('fetchHomepageData');
+			// this.$store.dispatch('fetchHomepageData');
 		},
 		onUnload() {
 
 		},
 		onShow() {
-			this.getAnalysisList(this.userId);
-			if (typeof wx !== 'undefined') {
+			if (typeof wx !== 'undefined' && uni.getSystemInfoSync().platform === 'wx') {
 				wx.hideHomeButton();
 			}
 		},
@@ -249,38 +183,36 @@
 					// 处理上传失败的情况
 				}
 			},
-			async getHomepageData() {
-				try {
-					this.isLoading = true;
-					this.error = null;
-					this.userId
-					console.log('Fetching homepage data with userId:', this.userId);
-
-					const data = await apiService.getHomepageData(this.userId);
-					this.homepageData = data;
-					console.log('Homepage data received:', this.homepageData);
-
-					// this.$nextTick(() => {
-					// 	this.drawRadar();
-					// });
-				} catch (error) {
-					this.error = 'Error fetching homepage data';
-					console.error(this.error, error);
-				} finally {
-					this.isLoading = false;
+			jumpBattlefield(row) {
+				if(row.result_list) {
+					const result_list = row.result_list;
+					if(result_list.status === 'complete') {
+						uni.navigateTo({
+							url: `/pages/battlefield/battlefield-summary?isFromMap=true&courseId=${row.id}`
+						});
+					}
 				}
+				uni.navigateTo({
+					url: `/pages/battlefield/battlefield-intro?courseId=${row.id}`
+				});
 			},
-
+			navigateToAnalysis(analysis) {
+				console.log("navigate To analysis....");
+				uni.navigateTo({
+					url: `/pages/chat/details?analysisId=${analysis.id}`
+				});
+				this.isLoading = false;
+			},
 			async getAnalysisList() {
 				try {
-					this.userId;
 					const data = await apiService.getAnalysisList(this.userId);
 					data.forEach(item => {
 						item.analysis = JSON.parse(item.analysis);
 						item.chatHistory = JSON.parse(item.chatHistory);
 					});
 					console.log(data);
-					this.analysisList = data;
+					// this.analysisList = data;
+					this.$store.commit('setAnalysisList', data);
 				} catch (error) {
 					// this.error = 'Error fetching analysis data';
 					console.error(this.error, error);
@@ -345,7 +277,7 @@
 		margin-top: 24rpx;
 		gap: 22rpx;
 	}
-	.class-item-left, .class-item-right {
+	.class-item-left {
 		width: 366rpx;
 		display: block;
 		align-items: center;
@@ -361,7 +293,7 @@
 		padding: 24rpx 32rpx;
 	}
 	.class-item-text-title {
-		font-size: 17px;
+		font-size: 16px;
 		font-weight: 600;
 		color: #FFFFFF;
 	}
@@ -414,7 +346,7 @@
 		font-weight: 600;
 		color: #D7D8E0;
 		margin-left: 50rpx;
-		margin-top: 16rpx;
+		/* margin-top: 16rpx; */
 	}
 
 	.history-solid {

@@ -5,11 +5,6 @@
 	export default {
 		onLaunch: async function () {
 			console.log('App Launch')
-			this.$store.dispatch('getNavBarHeight');
-			this.globalData={
-				audioContextGloabal:null
-			}
-			await this.fetchImageToken();
 			const userId = uni.getStorageSync('userId');
 			console.log('userId', userId)
 			const currentPages = getCurrentPages();
@@ -20,13 +15,13 @@
 				this.$store.dispatch('fetchHomepageData').then(() => {
 					const homepageData = this.$store.getters.getHomepageData;
 					if (homepageData.response && homepageData.response.eq_scores) {
-						// console.log(currentRoute);
+						// console.log("====",currentRoute);
 						if (currentRoute === 'pages/landing/landing' || currentRoute === '') {
 							// uni.navigateTo({
 							// 	url: `/pages/dashboard/dashboard_en?currentView=dashboard`
 							// });
 							uni.navigateTo({
-								url: `/pages/home/index?currentView=dashboard`
+								url: `/pages/home/index`
 							});
 						}
 					} else {
@@ -45,6 +40,12 @@
 					});
 				}
 			}
+			await this.fetchImageToken();
+			this.$store.dispatch('getNavBarHeight');
+			this.globalData={
+				audioContextGloabal:null
+			}
+			
 			const username = uni.getStorageSync('username');
 			if (username) {
 				this.$store.commit('setUsername', username);

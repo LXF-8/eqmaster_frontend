@@ -72,6 +72,7 @@ export default createStore({
 		gemCount: 0,
 		isPass: false,
 		npcHealth: {},
+		analysisList: {},
 	},
 	mutations: {
 		setUserId(state, userId) {
@@ -184,6 +185,9 @@ export default createStore({
 			});
 			console.log(state.npcs);
 		},
+		setAnalysisList(state, analysisList) {
+			state.analysisList = analysisList;
+		},
 	},
 	getters: {
 		getUserId(state) {
@@ -293,6 +297,12 @@ export default createStore({
 		getNpcHealth(state) {
 			return state.npcHealth;
 		},
+		getAnalysisList(state) {
+			return state.analysisList;
+		},
+		getAnalysisById: (state) => (analysisId) => {
+			return state.analysisList.find(analysis => analysis.id === parseInt(analysisId));
+		},
 	},
 	actions: {
 		async fetchHomepageData({
@@ -401,8 +411,11 @@ export default createStore({
 		},
 		async getNavBarHeight({ commit }) {
 			try {
-				const systemInfo = wx.getSystemInfoSync();
-				const menuButtonInfo = wx.getMenuButtonBoundingClientRect();
+				const systemInfo = uni.getSystemInfoSync();
+				let menuButtonInfo = { width: 0, height: 44, top: 0, right: 0 };
+				// #ifdef MP-WEIXIN
+				menuButtonInfo = wx.getMenuButtonBoundingClientRect();
+				// #endif
 
 				const statusBarHeight = systemInfo.statusBarHeight;
 

@@ -6,121 +6,62 @@
 				<view v-else-if="error">{{ error }}</view>
                 <view v-else>
                     <view class="tab">
-                        <view class="tab-item" :class="{'active': tabIndex == 0}" @click="tabIndexFun(0)">全部</view>
-                        <view class="tab-item" :class="{'active': tabIndex == 1}" @click="tabIndexFun(1)">职场</view>
-                        <view class="tab-item" :class="{'active': tabIndex == 2}" @click="tabIndexFun(2)">家庭</view>
-                        <view class="tab-item" :class="{'active': tabIndex == 3}" @click="tabIndexFun(3)">情感</view>
+                        <view class="tab-item" :class="{'active': tabIndex == index}" @click="tabIndexFun(index)" v-for="(item, index) in classList" :key="index">{{ item }}</view>
                     </view>
                     <view class="class-ai-list">
-                        <view class="class-ai-item-box">
-                            <view class="class-ai-item">
-                                <view class="class-ai-item-content">
+                        <!-- <canvas id="hexagonCanvas" :canvas-id="1" style="width: 130px; height: 130px;"></canvas> -->
+                        <view class="class-ai-item-box" v-for="(item, index) in courseDataList" :key="index">
+                            <view :class="index % 2 === 0 ? 'class-ai-item' : 'class-ai-item-right'">
+                                <view :class="index % 2 === 0 ? 'class-ai-item-content' : 'class-ai-item-content-right'">
                                     <view class="class-ai-item-title">
-                                        老板肚子的蛔虫
-                                        <text class="class-ai-item-title-type">简单</text>
+                                        {{ item.title }}
+                                        <text class="class-ai-item-title-type">{{ levelName[item.course_level] }}</text>
                                     </view>
-                                    <view class="class-ai-item-desc">在一个精致的会所包厢里，你与一位高层领导和两名同事共进晚餐。看似轻松的聚会，实际上领导在暗自</view>
-                                </view>
-                                <view class="class-ai-item-img">
-                                    <image class="class-ai-item-image" src="/static/web/level1completed.webp" mode="widthFix"></image>
+                                    <view class="class-ai-item-desc">{{ item.background }}</view>
                                 </view>
                             </view>
-                        </view>
-                        <view class="class-ai-item-box">
-                            <view class="class-ai-item-right">
-                                <view class="class-ai-item-content-right">
-                                    <view class="class-ai-item-title">
-                                        拒绝背锅
-                                        <text class="class-ai-item-title-type">简单</text>
-                                    </view>
-                                    <view class="class-ai-item-desc">在一个精致的会所包厢里，你与一位高层领导和两名同事共进晚餐。看似轻松的聚会，实际上领导在暗自</view>
-                                </view>
-                            </view>
-                            <view class="class-ai-item-img-left">
-                                <image class="class-ai-item-image" src="/static/web/level1completed.webp" mode="widthFix"></image>
-                            </view>
-                        </view>
-                        <view class="class-ai-item-box">
-                            <view class="class-ai-item">
-                                <view class="class-ai-item-content">
-                                    <view class="class-ai-item-title">
-                                        老板肚子的蛔虫
-                                        <text class="class-ai-item-title-type">简单</text>
-                                    </view>
-                                    <view class="class-ai-item-desc">在一个精致的会所包厢里，你与一位高层领导和两名同事共进晚餐。看似轻松的聚会，实际上领导在暗自</view>
-                                </view>
-                                <view class="class-ai-item-img">
-                                    <image class="class-ai-item-image" src="/static/web/level1completed.webp" mode="widthFix"></image>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="class-ai-item-box">
-                            <view class="class-ai-item-right">
-                                <view class="class-ai-item-content-right">
-                                    <view class="class-ai-item-title">
-                                        拒绝背锅
-                                        <text class="class-ai-item-title-type">简单</text>
-                                    </view>
-                                    <view class="class-ai-item-desc">在一个精致的会所包厢里，你与一位高层领导和两名同事共进晚餐。看似轻松的聚会，实际上领导在暗自</view>
-                                </view>
-                            </view>
-                            <view class="class-ai-item-img-left">
-                                <image class="class-ai-item-image" src="/static/web/level1completed.webp" mode="widthFix"></image>
-                            </view>
-                        </view>
-                        <view class="class-ai-item-box">
-                            <view class="class-ai-item">
-                                <view class="class-ai-item-content">
-                                    <view class="class-ai-item-title">
-                                        老板肚子的蛔虫
-                                        <text class="class-ai-item-title-type">简单</text>
-                                    </view>
-                                    <view class="class-ai-item-desc">在一个精致的会所包厢里，你与一位高层领导和两名同事共进晚餐。看似轻松的聚会，实际上领导在暗自</view>
-                                </view>
-                                <view class="class-ai-item-img">
-                                    <image class="class-ai-item-image" src="/static/web/level1completed.webp" mode="widthFix"></image>
-                                </view>
-                            </view>
-                        </view>
-                        <view class="class-ai-item-box">
-                            <view class="class-ai-item-right">
-                                <view class="class-ai-item-content-right">
-                                    <view class="class-ai-item-title">
-                                        拒绝背锅
-                                        <text class="class-ai-item-title-type">简单</text>
-                                    </view>
-                                    <view class="class-ai-item-desc">在一个精致的会所包厢里，你与一位高层领导和两名同事共进晚餐。看似轻松的聚会，实际上领导在暗自</view>
-                                </view>
-                            </view>
-                            <view class="class-ai-item-img-left">
-                                <image class="class-ai-item-image" src="/static/web/level1completed.webp" mode="widthFix"></image>
+                            <view :class="index % 2 === 0 ? 'class-ai-item-img' : 'class-ai-item-img-left'">
+                                <!-- <image class="class-ai-item-image" :src="getImg('/static/rectangle-left.png')" mode="widthFix"></image> -->
+                                <image class="class-ai-item-image" src="/static/rectangle-left.png"></image>
                             </view>
                         </view>
                     </view>
                 </view>
             </view>
         </scroll-view>
-        <Nav :selectedView="currentView === 'dashboard' ? 'Home' : 'Battlefield'" @switchHomeView="switchView"
-			:userId="userId" :username="username" :jobId="jobId" />
+        <Nav selectedView="Battlefield" />
     </view>
 </template>
 <script>
 import Nav from '../../components/Nav.vue';
+import { getImg } from '../../scripts/constants';
 export default {
     data() {
         return {
             error: '',
             isLoading: false,
             tabIndex: 0,
+            getImg,
+            classList: [
+                '全部',
+                '职场',
+                '家庭',
+                '情感'
+            ],
+            levelName: {
+                1: '简单',
+                2: '中等',
+                3: '困难'
+            }
         }
     },
     computed: {
-
+        courseDataList() {
+            return this.$store.getters.getCourseDataList;
+        },
     },
     watch: {
 
-    },
-    created() {
     },
     methods: {
         tabIndexFun(index) {
@@ -164,7 +105,7 @@ export default {
         left: 0;
         /* margin-bottom: 40rpx; */
         z-index: 998;
-        margin-left: 40rpx;
+        padding-left: 40rpx;
     }
     
 	.tab-item {
@@ -242,7 +183,7 @@ export default {
     }
     .class-ai-item-content-right {
         position: relative;
-        left: 120rpx;
+        left: 80rpx;
         width: 200px;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -254,7 +195,7 @@ export default {
     .class-ai-item-title {
         display: flex;
         align-items: center;
-        font-size: 34rpx;
+        font-size: 30rpx;
         color: #FFFFFF;
     }
     .class-ai-item-title-type {
@@ -274,20 +215,25 @@ export default {
 
     .class-ai-item-img {
         position: absolute;
-        right: 0;
-        top: -5px;
+        right: -15px;
+        top: 0;
         z-index: 10;
+        /* mask-image: radial-gradient(circle, white 90%, transparent 100%); */
+        /* border-radius: 10%; */
         /* border-radius: 50%; */
     }
     .class-ai-item-img-left {
         position: absolute;
         left: 0;
-        top: -5px;
+        top: 0;
         z-index: 10;
         /* border-radius: 50%; */
     }
+
     .class-ai-item-image {
-        width: 130px;
-        height: 130px;
+        width: 260rpx; 
+        height: 260rpx; 
+        object-fit: cover; 
+        clip-path: path("M49 2.6188C53.9504 -0.239323 60.0496 -0.239323 65 2.6188L105.292 25.8812C110.242 28.7393 113.292 34.0214 113.292 39.7376V86.2624C113.292 91.9786 110.242 97.2607 105.292 100.119L65 123.381C60.0496 126.239 53.9504 126.239 49 123.381L8.70835 100.119C3.75793 97.2607 0.708347 91.9786 0.708347 86.2624V39.7376C0.708347 34.0214 3.75793 28.7393 8.70835 25.8812L49 2.6188Z");
     }
 </style>
