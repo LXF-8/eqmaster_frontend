@@ -14,7 +14,7 @@
                             <view :class="index % 2 === 0 ? 'class-ai-item' : 'class-ai-item-right'">
                                 <view :class="index % 2 === 0 ? 'class-ai-item-content' : 'class-ai-item-content-right'">
                                     <view class="class-ai-item-title">
-                                        {{ item.title }}
+                                        <text class="class-ai-item-title-text">{{ item.title }}</text>
                                         <text class="class-ai-item-title-type" :style="{ backgroundColor: levelColor(item.course_level) }">{{ levelName[item.course_level] }}</text>
                                     </view>
                                     <view class="class-ai-item-desc">{{ item.background }}</view>
@@ -49,17 +49,6 @@ export default {
             isLoading: false,
             tabIndex: 1,
             getImg,
-            classList: [
-                '全部',
-                '职场',
-                '家庭',
-                '情感'
-            ],
-            levelName: {
-                1: '简单',
-                2: '中等',
-                3: '困难'
-            },
             gemCount: 0,
         }
     },
@@ -67,6 +56,21 @@ export default {
         courseDataList() {
             return this.$store.getters.getCourseDataList;
         },
+        classList() {
+            return [
+                this.$t('pages.home.shurafield.tag-all'),
+                this.$t('pages.home.shurafield.tag-workplace'),
+                this.$t('pages.home.shurafield.tag-family'),
+                this.$t('pages.home.shurafield.tag-emotions')
+            ];
+        },
+        levelName() {
+            return {
+                1: this.$t('pages.home.shurafield.easy'),
+                2: this.$t('pages.home.shurafield.medium'),
+                3: this.$t('pages.home.shurafield.difficult'),
+            };
+        }
     },
     watch: {
         
@@ -241,6 +245,13 @@ export default {
         font-size: 30rpx;
         color: #FFFFFF;
     }
+    .class-ai-item-title-text {
+        width: 70%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
     .class-ai-item-title-type {
         background-color: #E8FFC4;
         padding: 4rpx 16rpx;
@@ -258,51 +269,57 @@ export default {
 
     .class-ai-item-img {
         position: absolute;
+        display: flex;
         width: 130px; 
         height: 130px; 
         right: -15px;
         top: 0;
         z-index: 10;
+        align-items: center;
         /* mask-image: radial-gradient(circle, white 90%, transparent 100%); */
         /* border-radius: 10%; */
         /* border-radius: 50%; */
     }
     .class-ai-item-img-left {
         position: absolute;
+        display: flex;
         width: 130px; 
         height: 130px; 
         left: 0;
         top: 0;
         z-index: 10;
+        align-items: center;
         /* border-radius: 50%; */
     }
 
     .class-ai-item-image {
+        position: absolute;
         width: 100%; 
         height: 100%; 
         object-fit: cover; 
         clip-path: path("M49 2.6188C53.9504 -0.239323 60.0496 -0.239323 65 2.6188L105.292 25.8812C110.242 28.7393 113.292 34.0214 113.292 39.7376V86.2624C113.292 91.9786 110.242 97.2607 105.292 100.119L65 123.381C60.0496 126.239 53.9504 126.239 49 123.381L8.70835 100.119C3.75793 97.2607 0.708347 91.9786 0.708347 86.2624V39.7376C0.708347 34.0214 3.75793 28.7393 8.70835 25.8812L49 2.6188Z");
     }
     .complete-mask {
+        position: absolute;
         background-color: #000000;
         opacity: 0.5;
     }
     
     .gem-container {
         position: absolute;
-        top: 85rpx;
+        /* top: 85rpx; */
         display: flex;
 		flex-direction: row;
 		justify-content: center;
 		align-items: center;
 		width: 200rpx;
 		border-radius: 50rpx;
-		padding: 8rpx 12rpx;
+		/* padding: 8rpx 12rpx; */
         gap: 4px;
     }
     .gem {
-        width: 60rpx;
-        height: 62rpx;
+        width: 40rpx;
+        height: 42rpx;
 		display: flex;
 		align-items: center;
 	}

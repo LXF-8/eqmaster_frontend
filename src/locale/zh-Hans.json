@@ -17,6 +17,13 @@
 	"pages.home.index.upload-chat-history": "上传聊天记录",
 	"pages.home.index.upload-chat-history-desc": "遇到难以回复的消息？立刻上传吧！",
 	"pages.home.index.history": "历史记录",
+	"pages.home.shurafield.tag-all": "全部",
+	"pages.home.shurafield.tag-workplace": "职场",
+	"pages.home.shurafield.tag-family": "家庭",
+	"pages.home.shurafield.tag-emotions": "情感",
+	"pages.home.shurafield.easy": "简单",
+	"pages.home.shurafield.medium": "中等",
+	"pages.home.shurafield.difficult": "困难",
 
 	"components.Nav.home": "主页",
 	"components.Nav.Battlefield": "修罗场",

@@ -66,7 +66,7 @@
 			},
 			goToDashboard() {
 				uni.reLaunch({
-					url: "/pages/dashboard/dashboard_zh",
+					url: "/pages/home/index",
 				});
 			},
 			async loadCourse() {

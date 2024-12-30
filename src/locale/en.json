@@ -15,6 +15,13 @@
     "pages.home.index.upload-chat-history": "Upload Chat History",
     "pages.home.index.upload-chat-history-desc": "Having trouble responding to a message? Upload it right away!",
     "pages.home.index.history": "History",
+    "pages.home.shurafield.tag-all": "All",
+    "pages.home.shurafield.tag-workplace": "Workplace",
+    "pages.home.shurafield.tag-family": "Family",
+    "pages.home.shurafield.tag-emotions": "Emotions",
+    "pages.home.shurafield.easy": "Easy",
+    "pages.home.shurafield.medium": "Medium",
+    "pages.home.shurafield.difficult": "Difficult",
 
     "index.title": "EQoach",
     "components.Nav.home": "Home",

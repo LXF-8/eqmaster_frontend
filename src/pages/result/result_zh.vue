@@ -306,7 +306,7 @@ import {
 				// });
 				this.$store.commit('setHomeNavName', 'dashboard2');
 				uni.navigateTo({
-					url: `/pages/dashboard/dashboard_zh`
+					url: `/pages/home/index`
 				});
 			},
 			expand() {
@@ -317,7 +317,7 @@ import {
 					uni.navigateBack(); // 返回上一个页面
 				} else {
 					uni.redirectTo({
-						url: '/pages/dashboard/dashboard_zh' // 如果没有历史记录，导航到指定页面
+						url: '/pages/home/index' // 如果没有历史记录，导航到指定页面
 					});
 				}
 			}
