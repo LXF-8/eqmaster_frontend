@@ -52,10 +52,20 @@
 	import ProgressBar from '@/components/ProgressBar.vue'; // 引入组件
 	import { getImg } from '../../scripts/constants';
 	export default {
+		data() {
+			return {
+				courseId: 0,
+			};
+		},
 		components: {
 			ProgressBar, // 注册组件
 		},
-
+		onLoad(options) {
+			if(!options.courseId || options.courseId <= 0) {
+				uni.navigateBack();
+			}
+			this.courseId = options.courseId;
+		},
 		computed: {
 			courseInfo() {
 				return this.$store.getters.getCourseInfo;
@@ -87,8 +97,8 @@
 
 		methods: {
 			navigateToNextPage() {
-				uni.reLaunch({
-					url: '/pages/battlefield/battlefield-loading'
+				uni.redirectTo({
+					url: `/pages/battlefield/battlefield-loading`
 				});
 			},
 			goback() {
@@ -96,7 +106,7 @@
 					uni.navigateBack(); // 返回上一个页面
 				} else {
 					uni.redirectTo({
-						url: '/pages/battlefield/battlefield-intro'
+						url: `/pages/battlefield/battlefield-intro?courseId=${this.courseId}`
 					});
 				}
 			}

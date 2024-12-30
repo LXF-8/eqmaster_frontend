@@ -7,6 +7,11 @@
 				<view v-if="isLoading">加载中...</view>
 				<view v-else-if="error">{{ error }}</view>
 				<view v-else>
+					<view class="dashboard1-card-j">
+						<text class="card-title1">今日推荐</text>
+						
+					</view>
+
 					<!-- 使用可选链操作符和默认值 -->
 					<text class="score-title-head">早，{{homepageData?.response?.personal_info?.name || '用户'}}！</text>
 					<!-- 添加插图 -->

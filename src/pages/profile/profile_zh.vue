@@ -80,7 +80,7 @@
 			{{ $t('pages.profile.language') }}
 		</view>
 
-		<Nav selectedView="Profile" :userId="userId" :username="username" :jobId="jobId" />
+		<Nav selectedView="Profile" />
 
 		
 		 <!-- 语言选择弹框 -->
@@ -473,7 +473,7 @@ import { generateAsync } from 'jszip';
 					uni.navigateBack(); // 返回上一个页面
 				} else {
 					uni.redirectTo({
-						url: '/pages/dashboard/dashboard_zh' // 如果没有历史记录，导航到指定页面
+						url: '/pages/home/index' // 如果没有历史记录，导航到指定页面
 					});
 				}
 			}
@@ -560,7 +560,7 @@ import { generateAsync } from 'jszip';
 		display: flex;
 		align-items: center;
 		gap: 24rpx;
-		margin-top: 50rpx;
+		/* margin-top: 50rpx; */
 	}
 
 	.user-name-text {

@@ -3,20 +3,34 @@
 		 {
 		 	"path": "pages/landing/landing",
 		 	"style": {
-		 		// "navigationStyle": "custom",
 				"homeButton": true,
 				"navigationBarTitleText": "%index.title%",
 				"disableScroll": true
 		 	}
 		 },
 		 {
-		 	"path": "pages/dashboard/dashboard_zh",
-		 	"style": {
-		 		// "navigationStyle": "custom"
+			"path": "pages/home/index",
+			"style": {
+			   "navigationBarBackgroundColor": "#2F2F38",
+			   "navigationBarTitleText": "%components.Nav.home%"
+			}
+		},
+		{
+			"path": "pages/home/shurafield",
+			"style": {
+			   "navigationBarBackgroundColor": "#2F2F38",
+			   "navigationBarTitleText": "%components.Nav.home%"
+			}
+		},
+		{
+			"path": "pages/profile/profile_zh",
+			"style": {
+				"navigationStyle": "custom",
 				"navigationBarBackgroundColor": "#2F2F38",
-				"navigationBarTitleText": "%components.Nav.home%"
-		 	}
-		 },
+			   	"navigationBarTitleText": "%components.Nav.Profile%",
+				"disableScroll": true
+			}
+		},
 		{
 			"path": "pages/battlefield/battlefield-loading-zh",
 			"style": {
@@ -53,12 +67,6 @@
 				"navigationStyle": "custom"
 			}
 		},
-		{
-			"path": "pages/dashboard/dashboard",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
 		
 		{
 			"path": "pages/battlefield/battlefield-intro-zh",
@@ -66,20 +74,8 @@
 				"navigationStyle": "custom"
 			}
 		},
-		// {
-		// 	"path": "pages/dashboard/dashboard_zh",
-		// 	"style": {
-		// 		"navigationStyle": "custom"
-		// 	}
-		// },
 		{
-			"path": "pages/dashboard/moment_analysis",
-			"style": {
-				"navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/dashboard/moment_analysis_zh",
+			"path": "pages/chat/details",
 			"style": {
 				"navigationStyle": "custom"
 			}
@@ -163,20 +159,6 @@
 			"path": "pages/preference/preference3",
 			"style": {
 				// "navigationStyle": "custom"
-			}
-		},
-		{
-			"path": "pages/profile/profile_en",
-			"style": {
-				"navigationStyle": "custom",
-				"disableScroll": true
-			}
-		},
-		{
-			"path": "pages/profile/profile_zh",
-			"style": {
-				"navigationStyle": "custom",
-				"disableScroll": true
 			}
 		},
 		{

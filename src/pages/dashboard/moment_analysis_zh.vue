@@ -1,5 +1,5 @@
 <template>
-	<view class="container">
+	<view class="container" :style="{ '--nav-bar-height': navBarHeight }">
 		<view class="header" :style="{ height: navBarHeight + 'px'}">
 			<image class="header-icon" src="/static/back-left.png" @click="navigateToHome" :style="{marginTop: navBarTop + 'px'}"></image>
 			<text class="score-title-head" :style="{marginTop: navBarTop + 'px'}">{{ $t('pages.dashboard.moment_analysis.title') }}</text>
@@ -80,27 +80,11 @@
 	export default {
 		data() {
 			return {
+				analysisId: 0,
 				isModelOpen: false,
 				isDeleting: false,
 				isDeleteSuccess: false,
-				analysisResult: {
-					id: 1,
-					chatHistory: [{
-						user: "",
-						message: "",
-					}],
-					analysis: {
-						title: {
-							title: "title"
-						},
-						summary: {
-							summary: "summary"
-						},
-						suggestions: [{
-							point: ""
-						}]
-					}
-				},
+				// analysisResult: {},
 			}
 		},
 		computed: {
@@ -110,25 +94,13 @@
 			navBarHeight() {
 				return this.$store.getters.getNavBarHeight;
 			},
+			analysisResult() {
+				return this.$store.getters.getAnalysisById(this.analysisId);
+			}
 		},
 		onLoad(options) {
-			const {
-				analysisId
-			} = options;
+			const { analysisId } = options;
 			this.analysisId = analysisId;
-			uni.getStorage({
-				key: `analysis-${analysisId}`,
-				success: (res) => {
-					this.analysisResult = res.data;
-					// uni.removeStorage({
-					// 	key: `analysis-${analysisId}`,
-					// 	success: () => {
-					// 	    console.log('Storage data deleted successfully.');
-					// 	},
-					// })
-
-				},
-			})
 		},
 		methods: {
 			navigateToHome() {
@@ -136,7 +108,7 @@
 					uni.navigateBack(); // 返回上一个页面
 				} else {
 					uni.redirectTo({
-						url: '/pages/dashboard/dashboard_zh' // 如果没有历史记录，导航到指定页面
+						url: `/pages/home/index`, // 如果没有历史记录，导航到指定页面
 					});
 				}
 			},
@@ -166,7 +138,7 @@
 	.container {
 		position: relative;
 		background-color: #2f2f38;
-		height: auto;
+		height: 100vh;
 		width: 100%;
 		/* display: flex; */
 	}
@@ -194,7 +166,7 @@
 
 	.content {
 		display: flex;
-		height: calc(100vh - 60px);
+		height: calc(100vh - var(--nav-bar-height));
 		flex-direction: column;
 		justify-content: center;
 		/* text-align: center; */

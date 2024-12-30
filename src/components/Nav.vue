@@ -30,51 +30,29 @@
 				required: true,
 				default: 'Home',
 			},
-			userId: {
-				type: Number,
-				default: 0,
-			},
-			username: {
-				type: String,
-				default: '',
-			},
-			jobId: {
-				type: String,
-				default: '',
-			},
 		},
 		methods: {
 			navigateToProfilePage(val) {
-				const currentPages = getCurrentPages();
-				const currentRoute = currentPages[currentPages.length - 1].route;
 				if (val === 'Home') {
-					if (currentRoute !== 'pages/dashboard/dashboard_zh') {
-						uni.reLaunch({
-							url: `/pages/dashboard/dashboard_zh` // 添加查询参数
-						});
-					}
-					this.$store.commit('setHomeNavName', 'dashboard');
+					uni.navigateTo({
+						url: `/pages/home/index`
+					});
 					uni.setNavigationBarTitle({
 						title: this.$t('components.Nav.home'),
 					});
 					// this.$emit('switchHomeView', "dashboard");
 				}
 				if (val === 'Battlefield') {
-					if (currentRoute !== 'pages/dashboard/dashboard_zh') {
-						uni.reLaunch({
-							url: `/pages/dashboard/dashboard_zh` // 添加查询参数
-						});
-					}
-					this.$store.commit('setHomeNavName', 'dashboard2');
+					uni.navigateTo({
+						url: `/pages/home/shurafield`
+					});
 					uni.setNavigationBarTitle({
 						title: this.$t('components.Nav.Battlefield'),
 					});
-					// this.$emit('switchHomeView', "dashboard2");
-
 				}
 				if (val === 'Profile') {
-					uni.reLaunch({
-						url: `/pages/profile/profile_zh` // 添加查询参数
+					uni.navigateTo({
+						url: `/pages/profile/profile_zh`
 					});
 					uni.setNavigationBarTitle({
 						title: this.$t('components.Nav.Profile'),
@@ -105,7 +83,7 @@
 		justify-content: space-around;
 		align-items: center;
 		padding: 0 120rpx; /* 添加左右距离 */
-		margin-top: -10rpx;
+		/* margin-top: -10rpx; */
 		/* height: 150rpx;
     background-color: #252529;
     color: #252529;

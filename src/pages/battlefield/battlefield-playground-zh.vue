@@ -357,7 +357,7 @@
 			},
 			goToDashboard() {
 				uni.navigateTo({
-					url: "/pages/dashboard/dashboard_zh",
+					url: "/pages/home/index",
 				});
 				this.$store.commit('initNpcsHealth');
 			},

@@ -122,7 +122,7 @@
 					// jobId: this.homepageData.response.personal_info.job_id
 				});
 				uni.reLaunch({
-					url: `/pages/dashboard/dashboard_zh`,
+					url: `/pages/home/index`,
 
 					// url: `/pages/dashboard/dashboard?userId=${this.userId}&username=${encodeURIComponent(this.username)}&jobId=${this.homepageData.response.personal_info.job_id}`
 				});

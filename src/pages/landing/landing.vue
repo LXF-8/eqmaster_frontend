@@ -152,7 +152,7 @@
 						else
 						{
 							uni.navigateTo({
-								url: `/pages/dashboard/dashboard_zh?userId=${res.data.userid}&username=${res.data.name}&jobId=${res.data.jobid}`
+								url: `/pages/home/index`
 							});
 						}
 							
@@ -249,7 +249,7 @@
 										console.log(homepageData);
 										if (homepageData.response && homepageData.response.eq_scores) {
 											uni.navigateTo({
-												url: `/pages/dashboard/dashboard_zh?currentView=dashboard`
+												url: `/pages/home/index`
 											});
 										} else {
 											uni.navigateTo({
@@ -319,7 +319,7 @@
 							this.$store.commit('setJobId', loginResponse.jobid);
 							if (homepageData.response && homepageData.response.eq_scores) {
 								uni.navigateTo({
-									url: `/pages/dashboard/dashboard_zh?currentView=dashboard`
+									url: `/pages/home/index`
 								});
 							} else {
 								uni.navigateTo({
