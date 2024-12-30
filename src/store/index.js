@@ -329,9 +329,9 @@ export default createStore({
 		async fetchcourseData({
 			commit,
 			state
-		}) {
+		}, tagName) {
 			try {
-				const courseData = await apiService.getBattlefield(this.state.userId);
+				const courseData = await apiService.getBattlefield(this.state.userId, tagName);
 				if (!courseData) {
 					throw new Error('No course data received');
 				}

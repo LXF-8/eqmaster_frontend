@@ -83,7 +83,7 @@
 		justify-content: space-around;
 		align-items: center;
 		padding: 0 120rpx; /* 添加左右距离 */
-		margin-top: -10rpx;
+		/* margin-top: -10rpx; */
 		/* height: 150rpx;
     background-color: #252529;
     color: #252529;

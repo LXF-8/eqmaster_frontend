@@ -319,7 +319,7 @@
 							this.$store.commit('setJobId', loginResponse.jobid);
 							if (homepageData.response && homepageData.response.eq_scores) {
 								uni.navigateTo({
-									url: `/pages/dashboard/dashboard_zh?currentView=dashboard`
+									url: `/pages/home/index`
 								});
 							} else {
 								uni.navigateTo({
